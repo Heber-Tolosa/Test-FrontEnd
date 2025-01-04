@@ -13,7 +13,7 @@ export default function AppRouter() {
           <Route path="/" element={<IndexPage />} />
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/books" element={<BooksPage />} />
-          <Route path="/Autors" element={<AutorsPage />} />
+          <Route path="/autors" element={<AutorsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
