@@ -98,9 +98,21 @@ export default function IndexPage() {
           marginTop: "30px",
         }}
       >
-        <ButtonsIndex title="Livros" icon={<GiWhiteBook />} />
-        <ButtonsIndex title="Autores" icon={<IoPersonSharp />} />
-        <ButtonsIndex title="Favoritos" icon={<FaStar />} />
+        <ButtonsIndex
+          title="Livros"
+          icon={<GiWhiteBook style={{ width: "50px", height: "50px" }} />}
+          url="/books"
+        />
+        <ButtonsIndex
+          title="Autores"
+          icon={<IoPersonSharp style={{ width: "50px", height: "50px" }} />}
+          url="/autors"
+        />
+        <ButtonsIndex
+          title="Favoritos"
+          icon={<FaStar style={{ width: "50px", height: "50px" }} />}
+          url="favorites"
+        />
       </div>
     </body>
   );
