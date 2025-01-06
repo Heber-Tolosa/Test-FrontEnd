@@ -5,39 +5,38 @@ import { GiWhiteBook } from "react-icons/gi";
 import { IoPersonSharp } from "react-icons/io5";
 import { FaStar } from "react-icons/fa";
 
-export default function IndexPage() {
-  const MainTitle = styled.h1`
-    font-size: xxx-large;
-    text-transform: uppercase;
-    color: #45a049;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  `;
-  const FeaturesContainer = styled.ul`
-    width: 50%;
-    margin: auto;
-    margin-top: 20px;
-    border: 1px solid black;
-    border-radius: 1rem;
-    padding: 10px;
-  `;
-  const ListFeatures = styled.ul`
-    list-style-type: disc;
-    padding-left: 20px;
-    margin: auto;
+const MainTitle = styled.h1`
+  font-size: xxx-large;
+  text-transform: uppercase;
+  color: #45a049;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const FeaturesContainer = styled.ul`
+  width: 50%;
+  margin: auto;
+  margin-top: 20px;
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 10px;
+`;
+const ListFeatures = styled.ul`
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: auto;
 
-    li {
-      font-size: 16px;
-      margin-bottom: 10px;
-      color: #555;
-    }
-    li::after {
-      content: "✔";
-      margin-right: 10px;
-      color: #45a049;
-    }
-  `;
+  li {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  li::after {
+    content: "✔";
+    margin-right: 10px;
+    color: #45a049;
+  }
+`;
+export default function IndexPage() {
   return (
     <body>
       <MainTitle>
@@ -60,7 +59,7 @@ export default function IndexPage() {
           style={{
             fontSize: "15px",
             lineHeight: 1.6,
-            color: "#555",
+
             textAlign: "justify",
             fontWeight: 700,
             marginBottom: "9px",
