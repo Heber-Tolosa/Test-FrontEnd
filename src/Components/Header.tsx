@@ -33,7 +33,7 @@ export default function Header() {
         <Link href="/">Início</Link>
         <Link href="/books">Livros</Link>
         <Link href="/autors">Autores</Link>
-        <Link href="/autors">Favoritos</Link>
+        <Link href="/favorites">Favoritos</Link>
       </LinksContainer>
     </Header>
   );
