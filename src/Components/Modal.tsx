@@ -1,11 +1,14 @@
 import { Dispatch, MouseEvent, ReactNode, SetStateAction } from "react";
+import { UseFormReset } from "react-hook-form";
 import styled from "styled-components";
+import { authorItem } from "../types";
 
 type ModalProps = {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   title: string;
   children: ReactNode;
+  resetForm: UseFormReset<authorItem>;
 };
 
 const ModalOverlay = styled.div<{ open: boolean }>`
@@ -62,12 +65,19 @@ const ModalCloseButton = styled.button`
   }
 `;
 
-export default function Modal({ open, setOpen, title, children }: ModalProps) {
+export default function Modal({
+  open,
+  setOpen,
+  title,
+  children,
+  resetForm,
+}: ModalProps) {
   console.log("OPEn", open);
 
   const handleOverlayClick = (e: MouseEvent) => {
     if (e.target === e.currentTarget) {
       setOpen(false);
+      resetForm();
     }
   };
 
@@ -76,7 +86,14 @@ export default function Modal({ open, setOpen, title, children }: ModalProps) {
       <ModalContainer>
         <ModalHeader>
           <p style={{ width: "100%", textAlign: "center" }}>{title}</p>
-          <ModalCloseButton onClick={() => setOpen(false)}>X</ModalCloseButton>
+          <ModalCloseButton
+            onClick={() => {
+              setOpen(false);
+              resetForm();
+            }}
+          >
+            X
+          </ModalCloseButton>
         </ModalHeader>
         {children}
       </ModalContainer>

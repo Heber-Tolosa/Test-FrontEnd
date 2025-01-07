@@ -1,14 +1,17 @@
 import { IoMdAddCircle } from "react-icons/io";
 import styled from "styled-components";
 import Modal from "../Components/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldError, useForm } from "react-hook-form";
+import { v4 as uuidv4 } from "uuid";
+import { authorItem } from "../types";
+import AuthorsTable from "../Components/AuthorsTable";
 
 const CreateButton = styled.button`
   margin: auto;
   width: 10%;
   display: flex;
-  margin-top: 30px;
+  margin-top: 10px;
   justify-content: center;
   gap: 5px;
   align-items: center;
@@ -43,30 +46,48 @@ const SubmitButton = styled(CreateButton)`
   height: 40px;
 `;
 
-export default function AutorsPage() {
+export default function AuthorsPage() {
   const [openAddModal, setOpenAddModal] = useState(false);
+
+  const initialAuthorsList = (): authorItem[] => {
+    const localStorageList = localStorage.getItem("authors");
+    return localStorageList ? JSON.parse(localStorageList) : [];
+  };
+  const [authorList, setAuthorList] = useState(initialAuthorsList);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm<authorItem>();
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    const newAuthorData: authorItem = { ...data, id: uuidv4() };
+    setAuthorList([...authorList, newAuthorData]);
+    reset();
+    setOpenAddModal(false);
+    alert("Autor cadastrado");
   });
+
+  useEffect(() => {
+    localStorage.setItem("authors", JSON.stringify(authorList));
+  }, [authorList]);
 
   return (
     <>
+      <h1 style={{ textAlign: "center" }}>Autores</h1>
       <CreateButton onClick={() => setOpenAddModal(true)}>
         Criar Novo autor{" "}
         <IoMdAddCircle style={{ height: "20px", width: "20px" }} />
       </CreateButton>
+      <AuthorsTable data={authorList} />
+
       <Modal
         open={openAddModal}
         setOpen={setOpenAddModal}
         title="Criar Novo autor"
+        resetForm={reset}
       >
         <FormContainer>
           <form onSubmit={onSubmit} style={{ width: "50%" }}>
