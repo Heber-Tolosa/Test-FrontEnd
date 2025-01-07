@@ -13,4 +13,18 @@
 
 html, body {
   height: 100%;
+  background: #101010;
+  color: white;
+}
+
+.error {
+  display: block;
+  color: #ff4d4f;
+  font-size: small;
+}
+label{
+  display: block;
+}
+input{
+  display: block;
 }
