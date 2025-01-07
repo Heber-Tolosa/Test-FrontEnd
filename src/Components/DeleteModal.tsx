@@ -1,4 +1,4 @@
-import React, { Dispatch, MouseEvent, SetStateAction } from "react";
+import { Dispatch, MouseEvent, SetStateAction } from "react";
 import styled from "styled-components";
 
 const ModalOverlay = styled.div<{ open: string | undefined }>`
