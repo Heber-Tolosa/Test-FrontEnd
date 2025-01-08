@@ -1,17 +1,9 @@
-import { Dispatch, MouseEvent, ReactNode, SetStateAction } from "react";
-import { UseFormReset } from "react-hook-form";
+import React, { MouseEvent, useContext } from "react";
+import { AuthorsContext } from "../context/AuthorsContext";
 import styled from "styled-components";
 import { authorItem } from "../types";
 
-type ModalProps = {
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-  title: string;
-  children: ReactNode;
-  resetForm: UseFormReset<authorItem>;
-};
-
-const ModalOverlay = styled.div<{ open: boolean }>`
+const ModalOverlay = styled.div<{ open: authorItem | undefined }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -29,8 +21,8 @@ const ModalOverlay = styled.div<{ open: boolean }>`
 `;
 
 const ModalContainer = styled.div`
-  width: 50%;
-  height: 75%;
+  width: 30%;
+  height: 20%;
   background: #3a3f44;
   border-radius: 0.5rem;
 `;
@@ -39,7 +31,7 @@ const ModalHeader = styled.div`
   display: flex;
   background: #1890ff;
   border-radius: 0.5rem 0.5rem 0 0;
-  height: 6%;
+  height: 20%;
   align-items: center;
   position: relative;
   color: white;
@@ -65,35 +57,52 @@ const ModalCloseButton = styled.button`
   }
 `;
 
-export default function Modal({
-  open,
-  setOpen,
-  title,
-  children,
-  resetForm,
-}: ModalProps) {
-  const handleOverlayClick = (e: MouseEvent) => {
+const ItemLabel = styled.span`
+  font-size: 20px;
+  font-weight: 700;
+`;
+const DataContent = styled.div`
+  width: fit-content;
+  margin: auto;
+  margin-top: 20px;
+`;
+
+export default function AuthorDetails() {
+  const { openAuthorDetailsModal, setOpenAuthorDetailsModal } =
+    useContext(AuthorsContext);
+
+  const handleOverlayClick = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
-      setOpen(false);
-      resetForm();
+      setOpenAuthorDetailsModal(undefined);
     }
   };
 
   return (
-    <ModalOverlay onClick={handleOverlayClick} open={open}>
+    <ModalOverlay onClick={handleOverlayClick} open={openAuthorDetailsModal}>
       <ModalContainer>
         <ModalHeader>
-          <p style={{ width: "100%", textAlign: "center" }}>{title}</p>
+          <p style={{ width: "100%", textAlign: "center" }}>
+            Autor {openAuthorDetailsModal?.name}
+          </p>
           <ModalCloseButton
             onClick={() => {
-              setOpen(false);
-              resetForm();
+              setOpenAuthorDetailsModal(undefined);
             }}
           >
             X
           </ModalCloseButton>
         </ModalHeader>
-        {children}
+        <DataContent>
+          <p>
+            <ItemLabel>Nome:</ItemLabel> {openAuthorDetailsModal?.name}
+          </p>
+          <p>
+            <ItemLabel>Email:</ItemLabel> {openAuthorDetailsModal?.email}
+          </p>
+          <p>
+            <ItemLabel>ID:</ItemLabel> {openAuthorDetailsModal?.id}
+          </p>
+        </DataContent>
       </ModalContainer>
     </ModalOverlay>
   );

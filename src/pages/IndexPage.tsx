@@ -72,14 +72,12 @@ export default function IndexPage() {
           <li>
             Adicionar livros: Inclua novos livros à plataforma com facilidade.
           </li>
-          <li>Editar livros: Modifique os dados de livros já cadastrados.</li>
+
           <li>Excluir livros: Remova livros da sua lista de forma simples.</li>
           <li>
             Criar autores: Cadastre novos autores para organizar suas obras.
           </li>
-          <li>
-            Editar autores: Altere as informações dos autores já cadastrados.
-          </li>
+
           <li>Excluir autores: Exclua autores que não são mais necessários.</li>
           <li>
             Adicionar aos favoritos: Marque livros e autores como favoritos para

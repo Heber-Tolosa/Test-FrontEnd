@@ -7,6 +7,8 @@ import {
 import { authorItem } from "../types";
 import styled from "styled-components";
 import { FaTrashAlt } from "react-icons/fa";
+import { MouseEvent, useContext } from "react";
+import { AuthorsContext } from "../context/AuthorsContext";
 
 const MainAuthorsTable = styled.table`
   width: 60%;
@@ -42,6 +44,12 @@ const DeleteButton = styled.button`
     background-color: #c0392b;
   }
 `;
+const TableRow = styled.tr`
+  cursor: pointer;
+  &:hover {
+    background: #696969;
+  }
+`;
 
 type AuthorsTableProps = {
   data: authorItem[];
@@ -49,8 +57,8 @@ type AuthorsTableProps = {
 };
 
 export default function AuthorsTable({ data, onDelete }: AuthorsTableProps) {
+  const { setOpenAuthorDetailsModal } = useContext(AuthorsContext);
   const columnHelper = createColumnHelper<authorItem>();
-
   const columns = [
     /*  columnHelper.accessor("id", {
       header: () => "ID",
@@ -79,13 +87,18 @@ export default function AuthorsTable({ data, onDelete }: AuthorsTableProps) {
     debugTable: true,
     getCoreRowModel: getCoreRowModel(),
   });
+
+  const handleRowClick = (e: MouseEvent<HTMLDivElement>, data: authorItem) => {
+    if (e.target === e.currentTarget) {
+      setOpenAuthorDetailsModal(data);
+    }
+  };
   return (
     <MainAuthorsTable>
       <thead>
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map((header) => {
-              console.log("HEADER", header);
               return (
                 <AuthorsTableHeader
                   style={header.index === 0 ? { width: "30%" } : {}}
@@ -105,13 +118,18 @@ export default function AuthorsTable({ data, onDelete }: AuthorsTableProps) {
       </thead>
       <tbody>
         {table.getRowModel().rows.map((row) => (
-          <tr key={row.id}>
+          <TableRow key={row.id}>
             {row.getVisibleCells().map((cell) => (
-              <AuthorsTableCell key={cell.id + Math.random()}>
+              <AuthorsTableCell
+                onClick={(e) =>
+                  handleRowClick(e, cell.getContext().row.original)
+                }
+                key={cell.id + Math.random()}
+              >
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </AuthorsTableCell>
             ))}
-          </tr>
+          </TableRow>
         ))}
       </tbody>
     </MainAuthorsTable>
