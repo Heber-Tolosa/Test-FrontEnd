@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import { authorItem } from "../types";
 import AuthorsTable from "../Components/AuthorsTable";
-import { AuthorsContext } from "../context/AuthorsContext";
+import { DataContext } from "../context/DataContext";
 import CreateAuthorModal from "../Components/CreateAuthorModal";
 import DeleteModal from "../Components/DeleteModal";
 import AuthorDetails from "../Components/AuthorDetails";
@@ -40,7 +40,9 @@ export default function AuthorsPage() {
     setOpenAddAuthorModal,
     setOpenDeleteModal,
     openDeleteModal,
-  } = useContext(AuthorsContext);
+    booksList,
+    setBooksList,
+  } = useContext(DataContext);
 
   const {
     register,
@@ -63,7 +65,9 @@ export default function AuthorsPage() {
 
   const handleDelete = (id: string) => {
     const authorsFiltered = authorsList.filter((item) => item.id !== id);
+    const booksFiltered = booksList.filter((item) => item.author_id !== id);
     setAuthorList(authorsFiltered);
+    setBooksList(booksFiltered);
     setOpenDeleteModal(undefined);
   };
 

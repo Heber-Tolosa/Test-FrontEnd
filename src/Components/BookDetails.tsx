@@ -22,7 +22,7 @@ const ModalOverlay = styled.div<{ open: authorItem | undefined }>`
 
 const ModalContainer = styled.div`
   width: 30%;
-  height: 20%;
+  height: 30%;
   background: #3a3f44;
   border-radius: 0.5rem;
 `;
@@ -67,26 +67,30 @@ const DataContent = styled.div`
   margin-top: 20px;
 `;
 
-export default function AuthorDetails() {
-  const { openAuthorDetailsModal, setOpenAuthorDetailsModal } =
+export default function BookDetails() {
+  const { openBooksDetailsModal, setOpenBooksDetailsModal, authorsList } =
     useContext(DataContext);
 
   const handleOverlayClick = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
-      setOpenAuthorDetailsModal(undefined);
+      setOpenBooksDetailsModal(undefined);
     }
   };
 
+  const authorData = authorsList.find(
+    (item) => item.id === openBooksDetailsModal?.author_id
+  );
+
   return (
-    <ModalOverlay onClick={handleOverlayClick} open={openAuthorDetailsModal}>
+    <ModalOverlay onClick={handleOverlayClick} open={openBooksDetailsModal}>
       <ModalContainer>
         <ModalHeader>
           <p style={{ width: "100%", textAlign: "center" }}>
-            Autor {openAuthorDetailsModal?.name}
+            Livro {openBooksDetailsModal?.name}
           </p>
           <ModalCloseButton
             onClick={() => {
-              setOpenAuthorDetailsModal(undefined);
+              setOpenBooksDetailsModal(undefined);
             }}
           >
             X
@@ -94,13 +98,22 @@ export default function AuthorDetails() {
         </ModalHeader>
         <DataContent>
           <p>
-            <ItemLabel>Nome:</ItemLabel> {openAuthorDetailsModal?.name}
+            <ItemLabel>Nome:</ItemLabel> {openBooksDetailsModal?.name}
           </p>
           <p>
-            <ItemLabel>Email:</ItemLabel> {openAuthorDetailsModal?.email}
+            <ItemLabel>Paginas:</ItemLabel> {openBooksDetailsModal?.pages}
           </p>
           <p>
-            <ItemLabel>ID:</ItemLabel> {openAuthorDetailsModal?.id}
+            <ItemLabel>ID:</ItemLabel> {openBooksDetailsModal?.id}
+          </p>
+          <p>
+            <ItemLabel>Autor:</ItemLabel> {authorData?.name}
+          </p>
+          <p>
+            <ItemLabel>Autor email:</ItemLabel> {authorData?.email}
+          </p>
+          <p>
+            <ItemLabel>Autor ID:</ItemLabel> {authorData?.id}
           </p>
         </DataContent>
       </ModalContainer>

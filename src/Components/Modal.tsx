@@ -1,14 +1,14 @@
 import { Dispatch, MouseEvent, ReactNode, SetStateAction } from "react";
 import { UseFormReset } from "react-hook-form";
 import styled from "styled-components";
-import { authorItem } from "../types";
+import { authorItem, BookItem } from "../types";
 
 type ModalProps = {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   title: string;
   children: ReactNode;
-  resetForm: UseFormReset<authorItem>;
+  resetForm: UseFormReset<authorItem> | UseFormReset<BookItem>;
 };
 
 const ModalOverlay = styled.div<{ open: boolean }>`

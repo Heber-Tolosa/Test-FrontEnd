@@ -4,13 +4,13 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { authorItem } from "../types";
+import { BookItem } from "../types";
 import styled from "styled-components";
 import { FaTrashAlt } from "react-icons/fa";
 import { MouseEvent, useContext } from "react";
 import { DataContext } from "../context/DataContext";
 
-const MainAuthorsTable = styled.table`
+const MainBooksTable = styled.table`
   width: 60%;
   margin: auto;
   margin-top: 24px;
@@ -18,13 +18,13 @@ const MainAuthorsTable = styled.table`
   border-collapse: collapse;
 `;
 
-const AuthorsTableHeader = styled.th`
+const BooksTableHeader = styled.th`
   text-align: left;
   padding: 8px;
   border: 1px solid;
 `;
 
-const AuthorsTableCell = styled.td`
+const BooksTableCell = styled.td`
   text-align: left;
   padding: 8px;
   border: 1px solid;
@@ -51,26 +51,29 @@ const TableRow = styled.tr`
   }
 `;
 
-type AuthorsTableProps = {
-  data: authorItem[];
+type BooksTableProps = {
+  data: BookItem[];
   onDelete: (id: string) => void;
 };
 
-export default function AuthorsTable({ data, onDelete }: AuthorsTableProps) {
-  const { setOpenAuthorDetailsModal } = useContext(DataContext);
-  const columnHelper = createColumnHelper<authorItem>();
+export default function BooksTable({ data, onDelete }: BooksTableProps) {
+  const { setOpenBooksDetailsModal, authorsList } = useContext(DataContext);
+  const columnHelper = createColumnHelper<BookItem>();
   const columns = [
-    /*  columnHelper.accessor("id", {
-      header: () => "ID",
-      cell: (info) => info.getValue(),
-    }), */
     columnHelper.accessor("name", {
       header: () => "Nome",
       cell: (info) => info.getValue(),
     }),
-    columnHelper.accessor("email", {
-      header: () => "Email",
+    columnHelper.accessor("pages", {
+      header: () => "Páginas",
       cell: (info) => info.getValue(),
+    }),
+    columnHelper.accessor("author_id", {
+      header: () => "Autor",
+      cell: (info) => {
+        const author = authorsList.find((item) => item.id === info.getValue());
+        return <p>{author?.name}</p>;
+      },
     }),
     columnHelper.accessor("id", {
       header: () => "",
@@ -88,19 +91,19 @@ export default function AuthorsTable({ data, onDelete }: AuthorsTableProps) {
     getCoreRowModel: getCoreRowModel(),
   });
 
-  const handleRowClick = (e: MouseEvent<HTMLDivElement>, data: authorItem) => {
+  const handleRowClick = (e: MouseEvent<HTMLDivElement>, data: BookItem) => {
     if (e.target === e.currentTarget) {
-      setOpenAuthorDetailsModal(data);
+      setOpenBooksDetailsModal(data);
     }
   };
   return (
-    <MainAuthorsTable>
+    <MainBooksTable>
       <thead>
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map((header) => {
               return (
-                <AuthorsTableHeader
+                <BooksTableHeader
                   style={header.index === 0 ? { width: "30%" } : {}}
                   key={header.index}
                 >
@@ -110,7 +113,7 @@ export default function AuthorsTable({ data, onDelete }: AuthorsTableProps) {
                       header.getContext()
                     )}
                   </div>
-                </AuthorsTableHeader>
+                </BooksTableHeader>
               );
             })}
           </tr>
@@ -120,18 +123,18 @@ export default function AuthorsTable({ data, onDelete }: AuthorsTableProps) {
         {table.getRowModel().rows.map((row) => (
           <TableRow key={row.id}>
             {row.getVisibleCells().map((cell) => (
-              <AuthorsTableCell
+              <BooksTableCell
                 onClick={(e) =>
                   handleRowClick(e, cell.getContext().row.original)
                 }
                 key={cell.id + Math.random()}
               >
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </AuthorsTableCell>
+              </BooksTableCell>
             ))}
           </TableRow>
         ))}
       </tbody>
-    </MainAuthorsTable>
+    </MainBooksTable>
   );
 }

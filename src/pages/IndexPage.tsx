@@ -3,7 +3,6 @@ import styled from "styled-components";
 import ButtonsIndex from "../Components/ButtonsIndex";
 import { GiWhiteBook } from "react-icons/gi";
 import { IoPersonSharp } from "react-icons/io5";
-import { FaStar } from "react-icons/fa";
 
 const MainTitle = styled.h1`
   font-size: xxx-large;
@@ -79,10 +78,6 @@ export default function IndexPage() {
           </li>
 
           <li>Excluir autores: Exclua autores que não são mais necessários.</li>
-          <li>
-            Adicionar aos favoritos: Marque livros e autores como favoritos para
-            fácil acesso.
-          </li>
         </ListFeatures>
       </FeaturesContainer>
 
@@ -104,11 +99,6 @@ export default function IndexPage() {
           title="Autores"
           icon={<IoPersonSharp style={{ width: "50px", height: "50px" }} />}
           url="/autors"
-        />
-        <ButtonsIndex
-          title="Favoritos"
-          icon={<FaStar style={{ width: "50px", height: "50px" }} />}
-          url="favorites"
         />
       </div>
     </body>
