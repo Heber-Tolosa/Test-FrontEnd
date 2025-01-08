@@ -1,4 +1,4 @@
-import React, { MouseEvent, useContext } from "react";
+import { MouseEvent, useContext } from "react";
 import { AuthorsContext } from "../context/AuthorsContext";
 import styled from "styled-components";
 import { authorItem } from "../types";
