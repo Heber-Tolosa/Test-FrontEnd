@@ -8,7 +8,7 @@ import {
   UseFormReset,
 } from "react-hook-form";
 import styled from "styled-components";
-import { authorItem } from "../types";
+import { BookItem } from "../types";
 
 const FormContainer = styled.div`
   display: flex;
@@ -20,6 +20,11 @@ const FormContainer = styled.div`
 const FormInput = styled.input`
   width: 100%;
   height: 30px;
+`;
+const FormSelect = styled.select`
+  width: 100%;
+  height: 30px;
+  text-align: center;
 `;
 
 const SubmitButton = styled.button`
@@ -45,25 +50,26 @@ const SubmitButton = styled.button`
   }
 `;
 
-type CreateAuthorModalProps = {
-  errors: FieldErrors<authorItem>;
+type CreateBookModalProps = {
+  errors: FieldErrors<BookItem>;
   onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
-  register: UseFormRegister<authorItem>;
-  reset: UseFormReset<authorItem>;
+  register: UseFormRegister<BookItem>;
+  reset: UseFormReset<BookItem>;
 };
 
-export default function CreateAuthorModal({
+export default function CreateBookModal({
   register,
   onSubmit,
   reset,
   errors,
-}: CreateAuthorModalProps) {
-  const { openAddAuthorModal, setOpenAddAuthorModal } = useContext(DataContext);
+}: CreateBookModalProps) {
+  const { openAddBookModal, setOpenAddBookModal, authorsList } =
+    useContext(DataContext);
   return (
     <Modal
-      open={openAddAuthorModal}
-      setOpen={setOpenAddAuthorModal}
-      title="Criar Novo autor"
+      open={openAddBookModal}
+      setOpen={setOpenAddBookModal}
+      title="Criar novo livro"
       resetForm={reset}
     >
       <FormContainer>
@@ -85,22 +91,32 @@ export default function CreateAuthorModal({
               {(errors.name as FieldError).message}
             </span>
           )}
-          <label htmlFor="Email">Email</label>
-          <FormInput
-            type="email"
-            {...register("email", {
-              pattern: {
-                value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-                message: "e-mail inválido",
+          <label htmlFor="author_id">Autor</label>
+          <FormSelect
+            {...register("author_id", {
+              required: { value: true, message: "Selecione um autor" },
+              minLength: {
+                value: 2,
+                message: "Selecione um autor",
               },
             })}
-          />
-          {errors.email && (
+          >
+            <option value="">
+              --------------Selecione um autor--------------
+            </option>
+            {authorsList.map((item) => (
+              <option value={item.id}>{item.name}</option>
+            ))}
+          </FormSelect>
+          {errors.author_id && (
             <span className="error">
               {" "}
-              {(errors.email as FieldError).message}
+              {(errors.author_id as FieldError).message}
             </span>
           )}
+          <label htmlFor="pages">Páginas</label>
+          <FormInput type="number" {...register("pages")} />
+
           <SubmitButton type="submit">enviar</SubmitButton>
         </form>
       </FormContainer>
