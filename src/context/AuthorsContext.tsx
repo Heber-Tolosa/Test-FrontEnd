@@ -15,6 +15,8 @@ type AuthorsContextProps = {
   setOpenAddAuthorModal: Dispatch<SetStateAction<boolean>>;
   openDeleteModal: string | undefined;
   setOpenDeleteModal: Dispatch<SetStateAction<string | undefined>>;
+  openAuthorDetailsModal: authorItem | undefined;
+  setOpenAuthorDetailsModal: Dispatch<SetStateAction<authorItem | undefined>>;
 };
 
 export const AuthorsContext = createContext<AuthorsContextProps>(
@@ -34,6 +36,9 @@ export const AuthorsProvider = ({ children }: AuthorsProviderProps) => {
   const [openDeleteModal, setOpenDeleteModal] = useState<string | undefined>(
     undefined
   );
+  const [openAuthorDetailsModal, setOpenAuthorDetailsModal] = useState<
+    authorItem | undefined
+  >(undefined);
 
   useEffect(() => {
     localStorage.setItem("authors", JSON.stringify(authorsList));
@@ -48,6 +53,8 @@ export const AuthorsProvider = ({ children }: AuthorsProviderProps) => {
         setOpenAddAuthorModal,
         openDeleteModal,
         setOpenDeleteModal,
+        openAuthorDetailsModal,
+        setOpenAuthorDetailsModal,
       }}
     >
       {children}

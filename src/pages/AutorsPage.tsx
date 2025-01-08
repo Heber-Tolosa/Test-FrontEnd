@@ -8,6 +8,7 @@ import AuthorsTable from "../Components/AuthorsTable";
 import { AuthorsContext } from "../context/AuthorsContext";
 import CreateAuthorModal from "../Components/CreateAuthorModal";
 import DeleteModal from "../Components/DeleteModal";
+import AuthorDetails from "../Components/AuthorDetails";
 
 const CreateButton = styled.button`
   margin: auto;
@@ -58,15 +59,10 @@ export default function AuthorsPage() {
 
   const onDelete = (id: string) => {
     setOpenDeleteModal(id);
-    /*  console.log(id);
-    const authorsFiltered = authorsList.filter((item) => item.id !== id);
-    console.log("ARRAY FILTRADO", authorsFiltered);
-    setAuthorList(authorsFiltered); */
   };
 
   const handleDelete = (id: string) => {
     const authorsFiltered = authorsList.filter((item) => item.id !== id);
-    console.log("ARRAY FILTRADO", authorsFiltered);
     setAuthorList(authorsFiltered);
     setOpenDeleteModal(undefined);
   };
@@ -85,6 +81,7 @@ export default function AuthorsPage() {
         setOpen={setOpenDeleteModal}
         handleDelete={handleDelete}
       />
+      <AuthorDetails />
       <CreateAuthorModal
         errors={errors}
         onSubmit={onSubmit}
