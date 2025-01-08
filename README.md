@@ -1,27 +1,27 @@
-# Proyecto Técnico - Gestión de Autores y Libros
+# Projeto Técnico - Gestão de Autores e Livros
 
-Este proyecto es una **aplicación web** desarrollada como un test técnico utilizando las siguientes tecnologías:
+Este projeto é uma **aplicação web** desenvolvida como um teste técnico utilizando as seguintes tecnologias:
 
-- **React**: Para la creación de la interfaz de usuario.
-- **Redux**: Para el manejo del estado global de la aplicación.
-- **React-Router**: Para la navegación entre diferentes vistas dentro de la aplicación.
+- **React**: Para a criação da interface do usuário.
+- **Redux**: Para o gerenciamento do estado global da aplicação.
+- **React-Router**: Para a navegação entre diferentes vistas dentro da aplicação.
 
-## Descripción del Proyecto
+## Descrição do Projeto
 
-La aplicación tiene como objetivo permitir la **gestión de autores** y **libros**. Los usuarios podrán:
+A aplicação tem como objetivo permitir a **gestão de autores** e **livros**. Os usuários poderão:
 
-- **Guardar y eliminar autores**: Permite agregar autores al sistema, con la capacidad de eliminar los que ya no sean necesarios.
-- **Guardar y eliminar libros**: Los libros pueden ser vinculados a autores específicos. Los usuarios pueden agregar nuevos libros y eliminarlos si ya no son necesarios.
+- **Salvar e excluir autores**: Permite adicionar autores ao sistema, com a capacidade de excluir os que não são mais necessários.
+- **Salvar e excluir livros**: Os livros podem ser vinculados a autores específicos. Os usuários podem adicionar novos livros e excluí-los quando não forem mais necessários.
 
-### Funcionalidades principales
+### Funcionalidades principais
 
-- **Agregar y eliminar autores**: Puedes crear un nuevo autor con su nombre y detalles, o eliminar autores previamente creados.
-- **Agregar y eliminar libros**: Puedes añadir nuevos libros a un autor específico y eliminar libros ya existentes.
-- **Navegación dinámica**: Utilizando `React-Router`, se proporciona una navegación fluida entre las diferentes vistas de la aplicación, como la lista de autores y la de libros.
-- **Manejo de estado con Redux**: El estado de los autores y los libros se gestiona de manera centralizada usando Redux, lo que facilita el control y la actualización del estado de la aplicación.
+- **Adicionar e excluir autores**: Você pode criar um novo autor com seu nome e detalhes ou excluir autores já existentes.
+- **Adicionar e excluir livros**: Você pode adicionar novos livros a um autor específico e excluir livros já existentes.
+- **Navegação dinâmica**: Utilizando `React-Router`, a navegação entre as diferentes vistas da aplicação, como a lista de autores e a lista de livros, é fluida.
+- **Gerenciamento de estado com Redux**: O estado dos autores e dos livros é gerido de maneira centralizada usando Redux, facilitando o controle e a atualização do estado da aplicação.
 
-## Tecnologías utilizadas
+## Tecnologias utilizadas
 
-- **React**: Para construir la interfaz de usuario dinámica y reactiva.
-- **Redux**: Para gestionar el estado global de la aplicación de manera eficiente.
-- **React-Router**: Para manejar la navegación entre diferentes secciones de la aplicación sin recargar la página.
+- **React**: Para construir a interface de usuário dinâmica e reativa.
+- **Redux**: Para gerenciar o estado global da aplicação de forma eficiente.
+- **React-Router**: Para gerenciar a navegação entre diferentes seções da aplicação sem recarregar a página.
